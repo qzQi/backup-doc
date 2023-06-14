@@ -37,6 +37,8 @@ GitHub工作流是一种常用的团队协作开发模式，它采用分支管�
 
    使用`git push`命令将本地目标分支推送到远程仓库。例如：`git push origin feature01`
 
+   无关：将本地分支推送到远程（并创建）`(local-branch)git push -u origin branchName`
+
 5. **如果步骤3时候remote/feature01已经进行了修改**
 
    用`git pull`命令将远程目标分支更新到本地，`git pull origin feature01`
@@ -46,3 +48,11 @@ GitHub工作流是一种常用的团队协作开发模式，它采用分支管�
 
 
 还是不熟悉啊，练练！
+
+
+
+## git rebase
+
+git rebase可以用来合并分支以及整理commit历史。
+
+最好只在自己负责的（本地分支来进行rebase）
