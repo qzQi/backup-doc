@@ -1,3 +1,5 @@
+[TOC]
+
 ## 使用git
 
 *总是对这些工具不得心应手，加油这次一定！！！*          
@@ -461,5 +463,8 @@ git有专门的命令，使用git mv file1 file2 然后commit
   * git log --graph
   * git log --all --graph：--all是现实所有分支的信息
 
+## temp
+git删除本地分支所长传的远程分支
+git查看本地分支对应的远程分支
 
 
