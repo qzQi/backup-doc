@@ -464,7 +464,74 @@ git有专门的命令，使用git mv file1 file2 然后commit
   * git log --all --graph：--all是现实所有分支的信息
 
 ## temp
-git删除本地分支所长传的远程分支
-git查看本地分支对应的远程分支
+### git删除本地分支所上传的远程分支
+
+```bash
+git branch -a #
+git switch branch-name
+git push origin --delete branch-name #删除远程分支，前提是有权限
+```
+
+
+
+### git查看本地分支对应的远程分支
+
+```bash
+git branch -vv
+```
+
+
+
+### 公司git-workflow
+
+以IFM-10858需求为例：
+
+**首先管理员在gitlab创建一个feature-IFM-10858分支来开发，开发人员（可能多个）都在这个分支工作（最终提交到这个分支）**
+
+1、开发人员，在本地拉取这个远程分支到本地feature-IFM-10858
+
+```bash
+git switch -c feature-IFM-10858 origin/feature-IFM-10858
+```
+
+2、在此基础上创建一个dev-qzy-feature-IFM-10858分支在本地开发：
+
+平时自己的开发就在这个dev分支进行，修改后将这个分支提交到远程
+
+```bash
+git push -u origin/dev-qzy-feature-IFM-10858 #-u表示首次提交，之后直接git push即可
+```
+
+这样提交到远程就只有自己的修改，并且可以将自己的修改都放在这个dev-qzy分支。（等待以后合并）
+
+
+
+在将dev-qzy-feature-IFM-10858提交到远程的时候，如果feature-IFM-10858只有一个人开发那直接不用管远程的feature-IFM-10858（因为无人修改），直接push你的dev即可。
+
+
+
+如果当前分支是多个人配合完成的，那么dev-qzy-feature-IFM-10858提交的时候会略有不同：
+
+1、提交dev前，先在本地的feature-IFM-10858分支fetch/pull拉取远程最新的修改，并进行合并&&冲突解决。
+
+（因为别人可能已经先修改&&merge进了feature-IFM-10858分支）这个也就是保证本地的feature-IFM-10858是和远程feature-IFM-10858同步的（当然这个分支只有一个人的话没有这个问题），当然如何远程feature-IFM-10858和本地一样没有修改，那也不需要这些步骤。
+
+2、本地的feature-IFM-10858经过上一步的拉去，已经获取了别人的修改（别人已经进行merge request说明没问题了）
+
+然后切换到dev-qzy分支将feature分支与dev合并。
+
+这里就知道为什么本地要拉取feature-IFM-10858后创建一个自己的分支！
+
+3、将feature合并到dev分支后就可以将dev上传了
+
+```bash
+git switch dev-qzy-feature-IFM-10858
+git merge feature-IFM-10858
+```
+
+dev-qzy-IFM-10858是自己的工作分支，你随便提交，每天都将自己的工作提交上去，这样gitlab也好看！
+
+但是不要写什么注释，提交的是简单版本。
+
 
 
